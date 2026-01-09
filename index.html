@@ -1,116 +1,165 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Undangan Pernikahan</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alice:wght@300&display=swap" rel="stylesheet">
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Alice', Lora;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-    .embed-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -2;
-    }
-    .embed-container iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: -1;
-    }
-    .content {
-  position: relative;
-  height: 100vh;
+<meta charset="UTF-8">
+<title>Undangan Pernikahan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alice:wght@300&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Alice', serif;
+  overflow: hidden;
+}
+
+/* BACKGROUND IMAGE FULL */
+.bg-image {
+  position: fixed;
+  inset: 0;
+  background: url("background.png") center / cover no-repeat;
+  z-index: -3;
+}
+
+/* OVERLAY GELAP */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: -2;
+}
+
+/* COVER */
+.cover {
+  position: fixed;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* kunci: dorong ke bawah */
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
   color: white;
-  z-index: 1;
-  padding: 0 20px 40px; /* jarak aman dari bawah */
+  padding-bottom: 60px;
+  z-index: 5;
+  background: transparent;
+  animation: fadeIn 1.2s ease forwards;
 }
-    h1 {
-      margin: 0.2em;
-      font-size: 1.2em;
-      font-weight: 300;
-    }
-    h2 {
-      margin: 0.2em;
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.8em;
-    }
-    #sapaan {
-      margin-top: 1.2em;
-      font-size: 1em;
-      font-weight: 300;
-    }
-    #tamu {
-      font-size: 1.2em;
-      font-weight: 400;
-      margin-top: 0.2em;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: white;
-      color: black;
-    }
-    #note {
-      font-size: 0.8em;
-      margin-top: 10px;
-      font-weight: 300;
-    }
-  </style>
+
+/* TEKS */
+h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8em;
+  margin: 0.2em 0;
+}
+
+#sapaan {
+  margin-top: 1em;
+  font-size: 1em;
+}
+
+#tamu {
+  font-size: 1.2em;
+  margin-top: 0.3em;
+}
+
+/* BUTTON */
+button {
+  margin-top: 25px;
+  padding: 12px 30px;
+  font-size: 1em;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: white;
+  color: black;
+}
+
+/* ANIMASI TEKS */
+.animate {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textIn 1s ease forwards;
+}
+
+.delay-1 { animation-delay: .4s; }
+.delay-2 { animation-delay: .8s; }
+.delay-3 { animation-delay: 1.2s; }
+
+/* HIDE COVER */
+.cover.hide {
+  animation: fadeOut 1s ease forwards;
+}
+
+/* KEYFRAMES */
+@keyframes textIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+</style>
 </head>
+
 <body>
 
-<div class="embed-container">
-  <iframe loading="lazy"
-    src="https://www.canva.com/design/DAG95ooDKUQ/P2wRnfzhrAD5X_r88YgpEA/view?embed"
-    allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
-</div>
+<!-- BACKGROUND -->
+<div class="bg-image"></div>
 <div class="overlay"></div>
 
-<div class="content">
-  <h1></h1>
-  <h2></h2>
-  <div id="sapaan">Kepada Yth. Bapak/Ibu/Saudara/i</div>
-  <div id="tamu">Tamu Undangan</div>
-  <br>
-  <a id="bukaLink" href="#"><button>Buka Undangan</button></a>
-  <div id="note">Mohon maaf bila ada kesalahan pada</div> 
-      <div id="note">penulisan nama/gelar</div>
-  <br><br><br>
+<!-- AUDIO -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
+  
+<!-- COVER -->
+<div class="cover" id="cover">
+  <h2 class="animate delay-1">Zhakky & Wiwin</h2>
+
+  <div id="sapaan" class="animate delay-2">
+    Kepada Yth. Bapak/Ibu/Saudara/i
+  </div>
+
+  <div id="tamu" class="animate delay-3">
+    Tamu Undangan
+  </div>
+
+  <button onclick="bukaUndangan()">Buka Undangan</button>
 </div>
-  <br></br>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-  const namaTamu = params.get("to") || "Tamu Undangan";
-  document.getElementById("tamu").textContent = decodeURIComponent(namaTamu);
-  const linkUndangan = "https://undangan-wiza.my.canva.site/undangan-zhakky-wiwin";
-  document.getElementById("bukaLink").href = linkUndangan + "?to=" + encodeURIComponent(namaTamu);
+/* AMBIL NAMA TAMU */
+const params = new URLSearchParams(window.location.search);
+const namaTamu = params.get("to") || "Tamu Undangan";
+document.getElementById("tamu").textContent = decodeURIComponent(namaTamu);
+
+/* AKSI KLIK */
+function bukaUndangan() {
+  const music = document.getElementById("bgMusic");
+  const cover = document.getElementById("cover");
+
+  if (music) {
+    music.volume = 0.8;
+    music.play().catch(() => {});
+  }
+
+  cover.classList.add("hide");
+
+  setTimeout(() => {
+    window.location.href =
+      "https://undangan-wiza.my.canva.site/undangan-zhakky-wiwin?to=" +
+      encodeURIComponent(namaTamu);
+  }, 1000);
+}
 </script>
 
 </body>
