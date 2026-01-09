@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Undangan Pernikahan</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alice:wght@300&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Alice', Lora;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .embed-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+    .embed-container iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: -1;
+    }
+    .content {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* kunci: dorong ke bawah */
+  align-items: center;
+  text-align: center;
+  color: white;
+  z-index: 1;
+  padding: 0 20px 40px; /* jarak aman dari bawah */
+}
+    h1 {
+      margin: 0.2em;
+      font-size: 1.2em;
+      font-weight: 300;
+    }
+    h2 {
+      margin: 0.2em;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8em;
+    }
+    #sapaan {
+      margin-top: 1.2em;
+      font-size: 1em;
+      font-weight: 300;
+    }
+    #tamu {
+      font-size: 1.2em;
+      font-weight: 400;
+      margin-top: 0.2em;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+    }
+    #note {
+      font-size: 0.8em;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+
+<div class="embed-container">
+  <iframe loading="lazy"
+    src="https://www.canva.com/design/DAG95ooDKUQ/P2wRnfzhrAD5X_r88YgpEA/view?embed"
+    allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+</div>
+<div class="overlay"></div>
+
+<div class="content">
+  <h1></h1>
+  <h2></h2>
+  <div id="sapaan">Kepada Yth. Bapak/Ibu/Saudara/i</div>
+  <div id="tamu">Tamu Undangan</div>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <br>
+  <a id="bukaLink" href="#"><button>Buka Undangan</button></a>
+  <div id="note">Mohon maaf bila ada kesalahan pada</div> 
+      <div id="note">penulisan nama/gelar</div></br>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const namaTamu = params.get("to") || "Tamu Undangan";
+  document.getElementById("tamu").textContent = decodeURIComponent(namaTamu);
+  const linkUndangan = "https://undangan-wiza.my.canva.site/undangan-zhakky-wiwin";
+  document.getElementById("bukaLink").href = linkUndangan + "?to=" + encodeURIComponent(namaTamu);
+</script>
+
+</body>
+</html>
